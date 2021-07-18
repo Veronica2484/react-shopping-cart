@@ -1,4 +1,5 @@
 //feature 1
+
 import React from "react";
 import data from "./data.json"
 import Products from "./components/Products";
@@ -13,6 +14,9 @@ class App extends React.Component {
     };
   }
   render(){
+
+function App() {
+
   return (
     <div className="grid-container">
       <header>
