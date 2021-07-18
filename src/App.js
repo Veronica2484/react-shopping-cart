@@ -1,19 +1,41 @@
 //feature 1
 
+import React from "react";
+import data from "./data.json"
+import Products from "./components/Products";
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      products:data.products,
+      size:"",
+      sort:"",
+    };
+  }
+  render(){
+
 function App() {
+
   return (
     <div className="grid-container">
       <header>
-        <a href="/">React Shooping Cart</a>
+        <a href="/">React Shoping Cart</a>
       </header>
       <main>
-        Product List 
+        <div className="content">
+        <div className="main">
+        <Products products={this.state.products}></Products>
+        </div>
+        <div className="sidebar">Cart Items</div>
+        </div>
       </main>
       <footer>
         All right is reserved.
       </footer>
     </div>
   );
+  }
 }
 
 export default App;
