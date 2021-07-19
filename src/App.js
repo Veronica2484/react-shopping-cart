@@ -11,14 +11,26 @@ class App extends React.Component {
     this.state = {
       products: data.products,
       //by default there is not items in the cart
-      cartItems: [],
+      cartItems: localStorage.getItem('cartItems')
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [],
       size: '',
       sort: '',
     }
   }
+  //create a function to save the details from an order
+  createOrder = (order) => {
+    alert('Need to dave order for ' + order.name)
+  }
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice()
-    this.setState({ cartItems: cartItems.filter((x) => x._id !== product._id) })
+    this.setState({
+      cartItems: cartItems.filter((x) => x._id !== product._id),
+    })
+    localStorage.setItem(
+      'cartItems',
+      JSON.stringify(cartItems.filter((x) => x._id !== product._id))
+    )
   }
   //define addToCart function
   addToCart = (product) => {
@@ -35,6 +47,7 @@ class App extends React.Component {
       cartItems.push({ ...product, count: 1 })
     }
     this.setState({ cartItems })
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }
   sortProducts = (event) => {
     //this reads the value that the user selects
@@ -99,6 +112,7 @@ class App extends React.Component {
               <Cart
                 cartItems={this.state.cartItems}
                 removeFromCart={this.removeFromCart}
+                createOrder={this.createOrder}
               />
             </div>
           </div>
